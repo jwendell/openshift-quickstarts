@@ -34,6 +34,7 @@ import static io.undertow.servlet.Servlets.servlet;
  */
 public class ServletServer {
     public static final String MYAPP = "/";
+    private static final int DELAY = 120;
 
     public static void main(final String[] args) {
         String driver = System.getenv("DB_DRIVER");
@@ -68,6 +69,9 @@ public class ServletServer {
                     .addHttpListener(8080, "0.0.0.0")
                     .setHandler(path)
                     .build();
+            System.out.println("Delaying the start for " + DELAY + " seconds.");
+            Thread.sleep(DELAY * 1000);
+            System.out.println("Actually starting the server");
             server.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
